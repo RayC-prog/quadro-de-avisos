@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3000,
+            "driver": "MySQL",
+            "name": "DB",
+            "database": "quadro_de_avisos_tb",
+            "username": "root",
+            "password": "rayanne01"
+        }
+    ]
+}
