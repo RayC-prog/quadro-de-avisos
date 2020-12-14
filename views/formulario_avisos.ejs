@@ -1,52 +1,91 @@
-<!-- Incluir o head -->
-<%- include('./partials/head') %>
+<%- include('./partials/head') %> 
 
-  <body>
+<body>
+    <!--Menu-->
+    <%- include('./partials/navbar') %> 
+
+    <% if (typeof aviso !== 'undefined') { %>
+      <% var titulo = "Mudar aviso" %> 
+      <% var rota = "/avisos/editar/"+aviso.ID_avisos %> 
+    <% } else { %>
+      <% var titulo = "Novo Aviso" %> 
+      <% var rota = "/avisos/novo" %> 
+    <% } %>
+     
+
+
     <div class="container">
-      <h1 class = "alert alert-primary">
-        Formulário de cadastro de avisos
-      </h1>
-
       <br>
+      
+      <!--Eu não consegui fazer com que a mensagem de sucesso funcionasse então somente quando da erro aparece mensagem-->
       <% if (typeof msg !== 'undefined') { %>
 
-        <% if (msg.tipo === 'success') { %>
-          <div class="alert alert-success" role="alert">
-            <%= msg.corpo %> 
+        <% if (msg.tipo === "sucesso") { %>        
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="far fa-check-circle"></i>Sucesso</strong> <%= msg.corpo %> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+         
         <% } %>
-        
-        <% if (msg.tipo === 'erro') { %>
-          <div class="alert alert-danger" role="alert">
-            <%= msg.corpo %> 
+        <% if (msg.tipo === "erro") { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%= msg.tipo %></strong> <%= msg.corpo %> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+         
         <% } %>
 
       <% } %>
 
-      <form action="/avisos/novo" method="POST">
-        <div class="form-group">
-          <label for="titulo">Título</label> 
-          <input id="titulo" name="titulo" type="text" class="form-control">
-        </div>
-  
-        <div class="form-group">
-          <label for="data">Data</label> 
-          <input id="data" name="data" type="text" class="form-control">
-        </div>
-  
-        <div class="form-group">
-          <label for="mensagem">Mensagem</label> 
-          <textarea id="mensagem" name="mensagem" cols="40" rows="5" class="form-control"></textarea>
-        </div> 
-        
-        <div class="form-group">
-          <button name="submit" type="submit" class="btn btn-primary">Salvar</button>
-        </div>
-      </form>
-    </div>
+      <br>
 
-    <!-- Incluir o script do bootstrap -->
+      <a href="#"><i class="fas fa-arrow-left"></i> Clique para voltar</a> <br><br>
+
+      <div class="card shadow ">
+        <div class="card-header bg-pink text-white pt-3"> 
+        <h2><i class="fas fa-plus-circle"></i> <%= titulo %>  </h2>
+        </div>
+        <div class="card-body p-5">
+            <!--Formulári para o usuário inserir os avisos-->
+          <form action="<%= rota %>" method="POST">
+
+            <% if (typeof aviso !== 'undefined') { %>
+              <div class="form-group">
+                <label for="titulo">ID do aviso (Somente para leitura)</label> 
+                <input id="id" name="id" type="text" class="form-control" required value="<%= aviso.ID_avisos %> " readonly>
+              </div>
+            <% } %>
+
+
+            <div class="form-group">
+              <label for="titulo">Título</label> 
+              <input id="titulo" name="titulo" type="text" class="form-control" required value="<%= typeof aviso != 'undefined' ? aviso.titulo : null %>" placeholder="Digite o titulo do aviso (Exemplo: Prova de matemática)"> 
+            </div>
+            <div class="form-group">
+              <label for="data">Data</label> 
+              <input id="data" name="data" type="date" class="form-control"  required value="<%= typeof aviso != 'undefined' ? moment(aviso.data).format('DD/MM/YYYY') : null %>" >
+            </div>
+            <div class="form-group">
+              <label for="Digite o aviso aqui">Mensagem</label> 
+              <textarea id="mensagem" name="mensagem" cols="40" rows="5" class="form-control"
+              placeholder="Digite o aviso aqui (Exemplo: Não esquecer!!)" required><%= typeof aviso != 'undefined' ? aviso.mensagem : null %></textarea>
+            </div> 
+            <br>
+            <div class="form-group">
+              <button name="submit" type="submit" class="btn btn-success"><%= typeof aviso != 'undefined' ? "Mudar" : "Concluir" %></button>
+              <button name="submit" type="submit" class="btn btn-danger">Limpar</button>
+            </div>
+          </form>
+       </div> <!--Div que fecha o card-body-->
+    </div> <!--Dvi que fecha o card-->
+
+  </div> <!--Div que fecha o container-->
+    
     <%- include('./partials/scripts_import') %> 
+    
   </body>
 </html>

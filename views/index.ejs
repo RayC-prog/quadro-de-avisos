@@ -1,0 +1,47 @@
+<!--Incluir o head-->
+<%- include('./partials/head') %> 
+
+<body>
+    <!--Menu-->
+    <%- include('./partials/navbar') %> 
+    <br><br>
+
+    <div class="container">
+      
+      <% avisos.forEach(aviso => { %>
+
+        <div class="card shadow ">
+            
+            <div class="card-header bg-pink text-white pt-3 d-flex align-items-center justify-content-between"> 
+            <h2><i class="fas fa-calendar-week"></i> <%= aviso.titulo %></h2>
+            <h3 class="lead"> <%= moment(aviso.data).format("DD/MM/YYYY") %></h3>
+            </div>
+            
+            <div class="card-body p-5">
+            <!--Info Perfil-->
+            <div class="d-flex align-items-center">
+                <img src="img/eu.jpg" class="img-thumbnail rounded-circle" width="75">
+                
+
+                <div class="ml-2">
+                <div class="text-danger">Lays Leoni Barbosa</div>
+                <div class="text-secondary"> <%= moment(aviso.data, "YYYYMMDD").fromNow(); %> </div>
+                </div>
+            </div>
+    
+            <!--Descrição do aviso-->
+            <div class="mt-3">
+                <%= aviso.mensagem %>
+            </div>
+             
+           </div> <!--Div que fecha o card-body-->
+        </div> <!--Dvi que fecha o card-->
+
+      <% }) %>
+
+  </div> <!--Div que fecha o container-->
+    
+    <%- include('./partials/scripts_import') %> 
+    
+  </body>
+</html>
