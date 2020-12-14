@@ -1,13 +1,52 @@
-<!-- Incluir o head-->
-<%- include('./partials/head')%>
-  <body>
-  
-    <h1 class="alert alert-primary">
-      <span class="material-icons">
-      campaign
-      </span>Formulario de avisos cadastrados</h1>
+<!-- Incluir o head -->
+<%- include('./partials/head') %>
 
-<!-- Incluir os scripts do bootstrap-->
-    <%- include ('.partials/scripts_import')%>
+  <body>
+    <div class="container">
+      <h1 class = "alert alert-primary">
+        Formulário de cadastro de avisos
+      </h1>
+
+      <br>
+      <% if (typeof msg !== 'undefined') { %>
+
+        <% if (msg.tipo === 'success') { %>
+          <div class="alert alert-success" role="alert">
+            <%= msg.corpo %> 
+          </div>
+        <% } %>
+        
+        <% if (msg.tipo === 'erro') { %>
+          <div class="alert alert-danger" role="alert">
+            <%= msg.corpo %> 
+          </div>
+        <% } %>
+
+      <% } %>
+
+      <form action="/avisos/novo" method="POST">
+        <div class="form-group">
+          <label for="titulo">Título</label> 
+          <input id="titulo" name="titulo" type="text" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="data">Data</label> 
+          <input id="data" name="data" type="text" class="form-control">
+        </div>
+  
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label> 
+          <textarea id="mensagem" name="mensagem" cols="40" rows="5" class="form-control"></textarea>
+        </div> 
+        
+        <div class="form-group">
+          <button name="submit" type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Incluir o script do bootstrap -->
+    <%- include('./partials/scripts_import') %> 
   </body>
 </html>
