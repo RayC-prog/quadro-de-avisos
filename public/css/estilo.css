@@ -1,0 +1,11 @@
+
+.bg-pink {
+    background:#FF1493;
+    
+}
+
+.grad-pink{
+    background:rgb(199,21,133);
+    background: linear-gradient(20deg, rgba(255,20,147) 28%, rgba(255,105,180) 71) ;
+}
+
