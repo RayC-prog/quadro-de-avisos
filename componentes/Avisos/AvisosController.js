@@ -6,13 +6,13 @@ const Avisos = require ('./Avisos')
 
 //Rota da página inicial
 router.get('/', async (req,res)=>{
-    const avisos = await Avisos.selecionarTodos()
+    const avisos = await avisos.selecionarTodos()
     res.render('index',{avisos})
 })
 
 //Rota que mostra os avisos
 router.get('/avisos', async(req,res)=>{
-    const avisos = await Avisos.selecionarTodos()
+    const avisos = await avisos.selecionarTodos()
     res.render('avisos',{avisos})
 })
 
