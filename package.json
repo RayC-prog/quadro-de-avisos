@@ -1,7 +1,7 @@
 {
   "name": "quadro-de-avisos",
   "version": "1.0.0",
-  "description": "projeto quadro de avisos",
+  "description": "Projeto Quadro de avisos - ETEC João Belarmino",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,8 +19,12 @@
   "homepage": "https://github.com/RayC-prog/quadro-de-avisos#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.21.12",
+    "mysql2": "^2.2.5",
+    "moment": "^2.29.1",
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
